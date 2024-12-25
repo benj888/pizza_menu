@@ -1,115 +1,85 @@
-import Image from "next/image";
-import localFont from "next/font/local";
+import { useEffect, useReducer, useState } from "react";
+import { pizzaData } from "../../public/data";
+import { PortalDraw } from "@/components/portalDrawer";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+const Pizza = () => {
+  const [visible, setVisible] = useState(false);
+  const [selectedName, setSelectedName] = useState<string | null>(null);
+  const [illustrate, setIllustrate] = useState<string | null>(null);
 
-export default function Home() {
+  const headText = ["TODAY","MENU","ON SALE"]
+
+  const [textAct, setTextAct] = useState(0)  
+
+  useEffect(()=>{
+    const interval = setInterval(()=>{
+      setTextAct((action)=>(action+1)%headText.length);
+    },2500);
+    return ()=>clearInterval(interval)
+  },[headText.length])
+
   return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      {/* <div className="bg-[#f3f0e5] h-full pt-20"> */}
+      <div className="bg-[url('/pe.jpg')] bg-cover bg-center h-full relative ">
+        <div className="bg-white/50 h-full fixed top-0 left-0  w-[110%]  rotate-[3deg] z-0 transform origin-top-left"></div>
+        <div className="bg-white/50 h-full fixed bottom-0 right-0  w-[110%]  rotate-[3deg] z-0 transform origin-bottom-right "></div>
+        <div className="pt-20 relative z-10 ">
+          <div className="border-b-2 w-32 mx-auto border-black"></div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <div className="font-antiqueOlive uppercase text-center text-3xl pt-1 pb-1 relative h-10 overflow-hidden">
+          
+          {headText.map((item,index)=>(
+            <>
+            <div 
+            key={index}
+            className={`inset-1 absolute transition-all duration-1000 ease-in-out ${textAct===index ?"opacity-100 translate-x-0":"opacity-0 -translate-y-20" }`}
+            >
+            {item}
+            </div>
+            </>
+          ))}
+            
+          </div>
+
+          <div className="border-t-2 w-32 mx-auto border-black"></div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className="overflow-auto flex justify-center pt-20 relative z-10">
+          <div className="grid  grid-cols-2 w-1/2 gap-4 ">
+            {pizzaData.map((item, index) => (
+              <div className="flex gap-4" key={index}>
+                <img
+                  className="w-48 aspect-square self-start "
+                  src={item.photoName}
+                  alt={item.name}
+                  onClick={() => {
+                    setVisible(true);
+                    setSelectedName(item.name);
+                    setIllustrate(item.illustrate);
+                  }}
+                />
+                <div className="flex-1 ">
+                  <p className=" font-antiqueOlive">Name: {item.name}</p>
+                  <p className=" font-antiqueOlive">ingredients: {item.ingredients}</p>
+                  <p className=" font-antiqueOlive">Price: {item.price}</p>
+                </div>
+                <PortalDraw visible={visible} handleSetVisible={setVisible}>
+                  <div>
+                    <div className="text-center text-2xl font-bold underline pt-10">
+                      {selectedName}
+                    </div>
+                    <div className="text-left text-lg text-gray-700 leading-[2.5] p-10">
+                      {illustrate}
+                    </div>
+                  </div>
+                </PortalDraw>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
   );
-}
+};
+
+export default Pizza;
