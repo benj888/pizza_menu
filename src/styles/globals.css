@@ -25,3 +25,15 @@ body {
     text-wrap: balance;
   }
 }
+
+@font-face {
+  font-family: 'AntiqueOliveBlack';
+  src: url('/fonts/AntiqueOliveBlackRegular.ttf') format('truetype');
+  font-weight: lighter;
+  font-style: italic;
+}
+
+
+html, body, #__next {
+  height: 100%;
+}
