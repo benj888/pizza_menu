@@ -12,7 +12,7 @@ const Drawer = ({
 }) =>{
     return createPortal(
         <>
-        <div className={`fixed top-0 right-0 min- w-1/3 bg-[#f3f0e5] h-full duration-200 z-[999] ${visible ? "translate-x-0 rounded-sm shadow-md":"translate-x-full"}`}
+        <div className={`fixed top-0 right-0 lg:w-1/3 w-4/5 bg-[#f3f0e5] h-full duration-200 z-[999] ${visible ? "translate-x-0 rounded-sm shadow-md":"translate-x-full"}`}
         
         >
             {children}

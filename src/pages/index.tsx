@@ -21,7 +21,7 @@ const Pizza = () => {
   return (
     <>
       {/* <div className="bg-[#f3f0e5] h-full pt-20"> */}
-      <div className="bg-[url('/pe.jpg')] bg-cover bg-center h-full relative ">
+      <div className="bg-[url('/pe.jpg')] bg-cover bg-center min-h-screen relative ">
         <div className="bg-white/50 h-full fixed top-0 left-0  w-[110%]  rotate-[3deg] z-0 transform origin-top-left"></div>
         <div className="bg-white/50 h-full fixed bottom-0 right-0  w-[110%]  rotate-[3deg] z-0 transform origin-bottom-right "></div>
         <div className="pt-20 relative z-10 ">
@@ -45,11 +45,11 @@ const Pizza = () => {
           <div className="border-t-2 w-32 mx-auto border-black"></div>
         </div>
         <div className="overflow-auto flex justify-center pt-20 relative z-10">
-          <div className="grid  grid-cols-2 w-1/2 gap-4 ">
+          <div className="grid  grid-cols-1 lg:grid-cols-2 w-2/3 gap-4 ">
             {pizzaData.map((item, index) => (
-              <div className="flex gap-4" key={index}>
+              <div className="flex flex-col lg:flex-row gap-4" key={index}>
                 <img
-                  className="w-48 aspect-square self-start "
+                  className="w-full lg:w-48 aspect-square self-start"
                   src={item.photoName}
                   alt={item.name}
                   onClick={() => {
